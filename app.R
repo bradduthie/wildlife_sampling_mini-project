@@ -11,7 +11,7 @@ library(shiny)
 
 ui <- fluidPage(
     h1("Plot click demo"),
-    plotOutput("plot", click = "plot_click"),
+    plotOutput("plot", click = "plot_click", height = "700px"),
     actionButton("reset", "Reset"),
     actionButton("sample", "Sample")
 )
@@ -67,7 +67,7 @@ server <- function(input, output, session) {
             s$seed   <- sample(x = 1:9999, size = 1);
             sim_seed <- s$seed;
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
-            plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(0, 100),
+            plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
             polygon(x = c(0, 0, 100, 100), y = c(0, 100, 100, 0), 
                     border = 1, lty = "dotted");
@@ -88,7 +88,7 @@ server <- function(input, output, session) {
             if (!is.null(v$click1$x)){
                 par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
                 plot(x = 0, y = 0, type = "n", xlim = c(0, 100), 
-                     ylim = c(0, 100), xaxt = "n", yaxt = "n", asp = 1);
+                     ylim = c(-10, 100), xaxt = "n", yaxt = "n", asp = 1);
                 polygon(x = c(0, 0, 100, 100), y = c(0, 100, 100, 0), 
                         border = 1, lty = "dotted");
                 points(x = v$click1$x, y = v$click1$y, pch = 20, 
@@ -98,7 +98,7 @@ server <- function(input, output, session) {
             if (!is.null(v$vals[1])){
                 par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
                 plot(x = 0, y = 0, type = "n", xlim = c(0, 100), 
-                     ylim = c(0, 100), xaxt = "n", yaxt = "n" , asp = 1);
+                     ylim = c(-10, 100), xaxt = "n", yaxt = "n" , asp = 1);
                 polygon(x = c(0, 0, 100, 100), y = c(0, 100, 100, 0), 
                         border = 1, lty = "dotted");
                 xvals <- c(v$vals[1], v$vals[3]);
@@ -116,7 +116,7 @@ server <- function(input, output, session) {
             tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
             tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
-            plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(0, 100),
+            plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
             polygon(x = c(0, 0, 100, 100), y = c(0, 100, 100, 0), border = 1,
                     lty = "dotted");
@@ -126,25 +126,33 @@ server <- function(input, output, session) {
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
+            points(x = l$x[1:2], y = l$y[1:2], pch = 20, col = "#0072B2", 
+                   type = "b", cex = 4);
+            points(x = c(v$vals[1], l$x[2]), y = c(v$vals[2], l$y[2]), 
+                   col = "#0072B2", type = "l", lwd = 5);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[1], l$x[2], l$y[1], l$y[2], 
                                      tlocs_x, tlocs_y);
                 if(!is.null(found)){
                     points(x = found[,1], y = found[,2], col = "green", 
                            pch = 20);
+                    text(x = 10, y = -5, labels = "Distances:", cex = 2);
+                    found_vec <- sort(found[,3]);
+                    for(i in 1:dim(found)[1]){
+                        found_val <- round(found_vec[i], digits = 1);
+                        found_prt <- paste(found_val, ",", sep = "");
+                        text(x = 17 + (8 * i), y = -5.5, labels = found_prt, 
+                             cex = 2);
+                    }
                 }
             }
-            points(x = l$x[1:2], y = l$y[1:2], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[2]), y = c(v$vals[2], l$y[2]), 
-                   col = "#0072B2", type = "l", lwd = 5);
         }
         if(s$go == 2 & !is.null(v$vals[1])){
             set.seed(s$seed);
             tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
             tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
-            plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(0, 100),
+            plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
             polygon(x = c(0, 0, 100, 100), y = c(0, 100, 100, 0), border = 1,
                     lty = "dotted");
@@ -154,28 +162,33 @@ server <- function(input, output, session) {
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
+            points(x = l$x[1:3], y = l$y[1:3], pch = 20, col = "#0072B2", 
+                   type = "b", cex = 4);
+            points(x = c(v$vals[1], l$x[3]), y = c(v$vals[2], l$y[3]), 
+                   col = "#0072B2", type = "l", lwd = 5);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[2], l$x[3], l$y[2], l$y[3], 
                                      tlocs_x, tlocs_y);
                 if(!is.null(found)){
                     points(x = found[,1], y = found[,2], col = "green", 
                            pch = 20);
+                    text(x = 10, y = -5, labels = "Distances:", cex = 2);
+                    found_vec <- sort(found[,3]);
+                    for(i in 1:dim(found)[1]){
+                        found_val <- round(found_vec[i], digits = 1);
+                        found_prt <- paste(found_val, ",", sep = "");
+                        text(x = 17 + (8 * i), y = -5.5, labels = found_prt, 
+                             cex = 2);
+                    }
                 }
             }
-            
-            
-    
-            points(x = l$x[1:3], y = l$y[1:3], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[3]), y = c(v$vals[2], l$y[3]), 
-                   col = "#0072B2", type = "l", lwd = 5);
         }
         if(s$go == 3 & !is.null(v$vals[1])){
             set.seed(s$seed);
             tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
             tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
-            plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(0, 100),
+            plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
             polygon(x = c(0, 0, 100, 100), y = c(0, 100, 100, 0), border = 1,
                     lty = "dotted");
@@ -185,27 +198,33 @@ server <- function(input, output, session) {
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
+            points(x = l$x[1:4], y = l$y[1:4], pch = 20, col = "#0072B2", 
+                   type = "b", cex = 4);
+            points(x = c(v$vals[1], l$x[4]), y = c(v$vals[2], l$y[4]), 
+                   col = "#0072B2", type = "l", lwd = 5);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[3], l$x[4], l$y[3], l$y[4], 
                                      tlocs_x, tlocs_y);
                 if(!is.null(found)){
                     points(x = found[,1], y = found[,2], col = "green", 
                            pch = 20);
+                    text(x = 10, y = -5, labels = "Distances:", cex = 2);
+                    found_vec <- sort(found[,3]);
+                    for(i in 1:dim(found)[1]){
+                        found_val <- round(found_vec[i], digits = 1);
+                        found_prt <- paste(found_val, ",", sep = "");
+                        text(x = 17 + (8 * i), y = -5.5, labels = found_prt, 
+                             cex = 2);
+                    }
                 }
             }
-            
-   
-            points(x = l$x[1:4], y = l$y[1:4], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[4]), y = c(v$vals[2], l$y[4]), 
-                   col = "#0072B2", type = "l", lwd = 5);
         }
         if(s$go == 4 & !is.null(v$vals[1])){
             set.seed(s$seed);
             tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
             tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
-            plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(0, 100),
+            plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
             polygon(x = c(0, 0, 100, 100), y = c(0, 100, 100, 0), border = 1,
                     lty = "dotted");
@@ -215,21 +234,26 @@ server <- function(input, output, session) {
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
+            points(x = l$x[1:5], y = l$y[1:5], pch = 20, col = "#0072B2", 
+                   type = "b", cex = 4);
+            points(x = c(v$vals[1], l$x[5]), y = c(v$vals[2], l$y[5]), 
+                   col = "#0072B2", type = "l", lwd = 5);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[4], l$x[5], l$y[4], l$y[5], 
                                      tlocs_x, tlocs_y);
                 if(!is.null(found)){
                     points(x = found[,1], y = found[,2], col = "green", 
                            pch = 20);
+                    text(x = 10, y = -5, labels = "Distances:", cex = 2);
+                    found_vec <- sort(found[,3]);
+                    for(i in 1:dim(found)[1]){
+                        found_val <- round(found_vec[i], digits = 1);
+                        found_prt <- paste(found_val, ",", sep = "");
+                        text(x = 17 + (8 * i), y = -5.5, labels = found_prt, 
+                             cex = 2);
+                    }
                 }
             }
-        
-            
-
-            points(x = l$x[1:5], y = l$y[1:5], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[5]), y = c(v$vals[2], l$y[5]), 
-                   col = "#0072B2", type = "l", lwd = 5);
         }
     })
     
@@ -273,7 +297,7 @@ search_tsct <- function(x1, x2, y1, y2, tx, ty){
         rd2y <- sqrt((pts$y_inter - y2)*(pts$y_inter - y2));
         rng2 <- (rdiy > rd1y & rdiy > rd2y);
         if(eyes == TRUE & rng1 == TRUE & rng2 == TRUE){
-            found <- rbind(found, c(tx[i], ty[i]));
+            found <- rbind(found, c(tx[i], ty[i], pts$p_dist));
         }
     }
     return(found);
