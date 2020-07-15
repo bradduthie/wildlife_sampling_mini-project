@@ -113,8 +113,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 1 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -151,8 +151,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 2 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -189,8 +189,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 3 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -227,8 +227,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 4 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -265,8 +265,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 5 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -303,8 +303,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 6 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -341,8 +341,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 7 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -379,8 +379,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 8 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -417,8 +417,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 9 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -455,8 +455,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 10 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -493,8 +493,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 11 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -531,8 +531,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 12 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -569,8 +569,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 13 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -607,8 +607,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 14 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -645,8 +645,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 15 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -683,8 +683,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 16 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -721,8 +721,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 17 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -759,8 +759,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 18 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -797,8 +797,8 @@ server <- function(input, output, session) {
         }
         if(s$go == 19 & !is.null(v$vals[1])){
             set.seed(s$seed);
-            tlocs_x <- sample(x = 1:100, size = 500, replace = TRUE);
-            tlocs_y <- sample(x = 1:100, size = 500, replace = TRUE);
+            tlocs_x <- sample(x = 1:100, size = 1000, replace = TRUE);
+            tlocs_y <- sample(x = 1:100, size = 1000, replace = TRUE);
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -890,7 +890,11 @@ search_tsct <- function(x1, x2, y1, y2, tx, ty){
     for(i in 1:length(tx)){
         pts  <- point_inter_dist(x1, x2, y1, y2, 
                                  tx[i], ty[i]);
-        eyes <- pts$p_dist < 10;
+        if(pts$p_dist <= 10){
+            eyes <- rbinom(n = 1, size = 1, prob = exp(-0.5 * pts$p_dist));
+        }else{
+            eyes <- 0;
+        }
         rdix <- sqrt((x1 - x2)*(x1 - x2));
         rd1x <- sqrt((pts$x_inter - x1)*(pts$x_inter - x1));
         rd2x <- sqrt((pts$x_inter - x2)*(pts$x_inter - x2));
