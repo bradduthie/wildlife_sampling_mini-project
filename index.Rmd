@@ -3,6 +3,7 @@ title: "SCIU3FB Wildlife sampling mini-project"
 author: "Brad Duthie"
 output:
   html_document: default
+  word_document: default
   pdf_document: default
 ---
 
@@ -38,7 +39,7 @@ arrows(x0 = 22, x1 = 31.8, y0 = 6, y1 = 6, length = 0.1, code = 2);
 arrows(x1 = 22, x0 = 12.2, y0 = 6, y1 = 6, length = 0.1, code = 1);
 points(x = 32.25, y = 6, col = "green", pch = 20);
 text(x = 27, y = 6.5, labels = "Observing");
-text(x = 21.25, y = 10, labels = "Transect 'A'", col = "red", srt = 90, 
+text(x = 21.25, y = 10, labels = "Transect A", col = "red", srt = 90, 
      cex = 1);
 text(x = 24, y = 4, labels = "Start", col = "red");
 text(x = 24, y = 16, labels = "End", col = "red");
@@ -58,13 +59,30 @@ A, 0.59
 It is important to recognise that your ability to see a *B. bbqstick* is going to depend on how far it is away from the transect. While you will probably always be able to see a *B. bbqstick* when it is right on top of the transect, you might never be able to see one that is over 10 metres away. Hence, it is reasonable to assume that your ability to observe and record a *B. bbqstick* will decrease as it gets farther from the transect. After collecting data on *B. bbqstick* distances, we will use a statistical model to account for this decrease in *B. bbqstick* observation so that we can more accurately estimate *B. bbqstick* density. It will not be necessary to understand the mathematical details of the model, but it is important that you understand what the model is doing and why it improves our estimate of *B. bbqstick* density.
 
 
-
-
 Protocol for sampling along a virtual transect (online)
 ================================================================================
 
+If you are unable to sample along a physical transect on campus, you can simulate the process of data collection in [an online application](https://bradduthie.shinyapps.io/wildlife_sampling_mini-project/). When click the link to this application, you will see a brown box representing a virtual field, and some instructions:
 
+> You are in field location number: [YOUR FIELD NUMBER]. Write this number down, then click anywhere in the field to set where your transect starts. Click again to set where your transect ends, and start sampling by clicking 'Sample' once. **Keep your transect inside the dotted box! Click to start.
+
+After you have written down your field number, you can begin placing your transects. Make sure that your first click is inside the dotted box (if you click somewhere else by accident, just click 'Reset' to go to a new field). After you click, you should see the text dissappear, and an orange dot in the location where you clicked; this is the start of your transect. You can select anywhere else inside the dotted box to set the end of your transect. If you do not like the transect you have made, you can click 'Reset' and start over.
+
+Once you have the start and end points of your transect, click 'Sample' to start looking for *B. bbqstick* individuals. These are represented as small green dots that you observe perpendicular to the transect. If you observe one or more *B. bbqstick* individuals, then you also see numbers beneath the box indicating how far away these individuals are from the transect. **Write these distances down, or record them in a spreadsheet or text file**. Once you have recorded the distances in one step along the transect, take another step by again clicking 'Sample'. You should see some more *B. bbqstick* individuals and distances to write down (note sometimes you will not see any). Continue to move along the transect from the start to the end by clicking 'Sample', and writing down *B. bbqstick* distances each time. Once you have come to the end of your transect, you should see some more instructions.
+
+> You have now finished sampling distances. The start of your transect was: X = [LOCATION], Y = [LOCATION]. The end of your transect was: X = [LOCATION], Y = [LOCATION]. Record these numbers for later use. Repeat this exercise until you have completed 3 transects, then continue to the data analysis portion of the project.
+
+After recording your X and Y starting and ending locations, click 'Reset' to repeat the exercise. Do this until you have three transects of data, which you can label 'A', 'B', and 'C'. You will use these in you data analysis.
 
 
 Protocol for sampling along a physical transect (on campus)
 ================================================================================
+
+
+
+
+
+
+
+
+
