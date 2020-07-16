@@ -848,15 +848,13 @@ server <- function(input, output, session) {
                         round(v$vals[4], digits = 1));
             m4 <- "Record these numbers for later use.";
             m5 <- "Repeat this exercise until you have completed 3 transects,";
-            m6 <- "then continue to the data analsis portion of the project.";
-            m7 <- "http://bradduthie.github.io/wildlife_sampling_mini-project";
+            m6 <- "then continue to the data analysis portion of the project.";
             text(x = 50, y = 75, labels = m1, cex = 2);
             text(x = 50, y = 60, labels = m2, cex = 2);
             text(x = 50, y = 50, labels = m3, cex = 2);
-            text(x = 50, y = 40, labels = m4, cex = 2);
-            text(x = 50, y = 30, labels = m5, cex = 2);
-            text(x = 50, y = 20, labels = m6, cex = 2);
-            text(x = 50, y = 10, labels = m7, cex = 2);
+            text(x = 50, y = 30, labels = m4, cex = 2);
+            text(x = 50, y = 20, labels = m5, cex = 2);
+            text(x = 50, y = 10, labels = m6, cex = 2);
         }
     })
     
