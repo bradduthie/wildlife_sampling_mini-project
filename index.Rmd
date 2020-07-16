@@ -1,0 +1,70 @@
+---
+title: "SCIU3FB Wildlife sampling mini-project"
+author: "Brad Duthie"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+Objective of wildlife sampling mini-project
+================================================================================
+
+
+
+```{css, echo = FALSE}
+table {
+  margin: auto;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
+}
+table thead th { border-bottom: 1px solid #ddd; }
+th, td { padding: 5px; }
+thead, tfoot, tr:nth-child(even) { background: #eee; }
+```
+
+There are many situations in ecology and management in which we want to know how many individuals there are in a population. Since we usually cannot count all of the individuals directly, we often need to apply field and statistical techniques to estimate population size. In this mini-project, you will learn how to sample along a linear transect, then use a statistical model to estimate the number of individuals in a location from the data that you collect. The statistical modelling will be discussed in a separate document; these instructions only tell you how to collect the data. 
+
+Imagine that we want to know the density of a species that occurs throughout a large landscape. We will call this hypothetical species *BBQstick bbqstick* (for reasons that will become clear after you read the on campus protocol below). We cannot count every *B. bbqstick*, but we can develop a protocol that samples some of them in a small area, then uses that sample to make inferences about the number of *B. bbqsticks* in the larger landscape. We will do this by sampling along a linear transect. This linear transect will have a fixed starting point, and a fixed ending point. From the starting point, we will walk slowly toward the ending point, looking to the side in both directions as we do (i.e., looking perpendicular to the transect in both directions; see the figure below). 
+
+
+```{r, echo = FALSE, fig.height = 3}
+par(mar=c(0,0,0,0), bty = "n");
+plot(x = 0, y = 0, type = "n", xlim = c(10, 30), ylim = c(0, 20), 
+     xaxt = "n", yaxt = "n", xlab = "", ylab = "", asp = 1);
+points(x = c(22, 22), y = c(4, 16), pch = 20, cex = 2, col = "red");
+points(x = rep(22, 100), y = seq(from = 4, to = 16, length = 100),
+       type = "l", col = "red", lwd = 3);
+arrows(x0 = 22, x1 = 31.8, y0 = 6, y1 = 6, length = 0.1, code = 2);
+arrows(x1 = 22, x0 = 12.2, y0 = 6, y1 = 6, length = 0.1, code = 1);
+points(x = 32.25, y = 6, col = "green", pch = 20);
+text(x = 27, y = 6.5, labels = "Observing");
+text(x = 21.25, y = 10, labels = "Transect 'A'", col = "red", srt = 90, 
+     cex = 1);
+text(x = 24, y = 4, labels = "Start", col = "red");
+text(x = 24, y = 16, labels = "End", col = "red");
+```
+
+To sample along the red Transect A above, you walk from the start toward the end. As you walk, you look in each direction, stopping whenever you observe a *B. bbqstick* (shown in green above). When you observe a *B. bbqstick*, measure how far away it is from the transect. Continue along the transect until you reach the end. By the end, you will have a list of measurements, each representing measurements of *B. bbqstick* individuals observed from the transect. It will look like the below, but with many more rows of measurements.
+
+```
+Transect, Distance
+A, 0.10
+A, 1.47
+A, 1.61
+A, 0.22
+A, 0.59
+```
+
+It is important to recognise that your ability to see a *B. bbqstick* is going to depend on how far it is away from the transect. While you will probably always be able to see a *B. bbqstick* when it is right on top of the transect, you might never be able to see one that is over 10 metres away. Hence, it is reasonable to assume that your ability to observe and record a *B. bbqstick* will decrease as it gets farther from the transect. After collecting data on *B. bbqstick* distances, we will use a statistical model to account for this decrease in *B. bbqstick* observation so that we can more accurately estimate *B. bbqstick* density. It will not be necessary to understand the mathematical details of the model, but it is important that you understand what the model is doing and why it improves our estimate of *B. bbqstick* density.
+
+
+
+
+Protocol for sampling along a virtual transect (online)
+================================================================================
+
+
+
+
+Protocol for sampling along a physical transect (on campus)
+================================================================================
