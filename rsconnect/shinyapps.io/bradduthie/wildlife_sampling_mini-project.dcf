@@ -1,0 +1,13 @@
+name: wildlife_sampling_mini-project
+title: wildlife_sampling_mini-project
+username:
+account: bradduthie
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2578483
+bundleId: 3399268
+url: https://bradduthie.shinyapps.io/wildlife_sampling_mini-project/
+when: 1594897550.12986
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: scratch.R

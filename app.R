@@ -7,14 +7,14 @@
 #    http://shiny.rstudio.com/
 #
 
-library(shiny)
+library(shiny);
 
 ui <- fluidPage(
     h2("http://bradduthie.github.io/wildlife_sampling_mini-project"),
     plotOutput("plot", click = "plot_click", height = "700px"),
     actionButton("reset", "Reset"),
     actionButton("sample", "Sample")
-)
+);
 
 server <- function(input, output, session) {
     
@@ -37,24 +37,24 @@ server <- function(input, output, session) {
         if (is.null(v$click1)) {
             # We don't have a first click, so this is the first click
             v$click1 <- input$plot_click;
-            v$vals   <- NULL
+            v$vals   <- NULL;
         } else {
             # We already had a first click, so this is the second click.
             v$vals <- c(v$click1$x, v$click1$y, input$plot_click$x,
                         input$plot_click$y);
             # And clear the first click so the next click starts a new
             # range.
-            v$click1 <- NULL
+            v$click1 <- NULL;
         }
     })
     
     observeEvent(input$reset, {
         # Reset both the range and the first click, if any.
-        v$vals   <- NULL
-        v$click1 <- NULL
-        s$go     <- 0
-        l$x      <- 0
-        l$y      <- 0
+        v$vals   <- NULL;
+        v$click1 <- NULL;
+        s$go     <- 0;
+        l$x      <- 0;
+        l$y      <- 0;
         s$seed   <- NULL;
     })
     
@@ -74,11 +74,11 @@ server <- function(input, output, session) {
             lines(x = c(0, 0), y = c(10, 85), lwd = 5, col = "#CCCC99");
             lines(x = c(100, 100), y = c(10, 85), lwd = 5, col = "#CCCC99");
             m1 <- paste("You are in field location number: ", sim_seed);
-            m2 <- "Write this number down, then click anywhere in"
-            m3 <- "the field to set where your transect starts."
-            m4 <- "Click again to set where your transect ends,"
-            m5 <- "and start sampling by clicking 'Sample' once."
-            m6 <- "Keep your transect inside the dotted box! Click to start."
+            m2 <- "Write this number down, then click anywhere in";
+            m3 <- "the field to set where your transect starts.";
+            m4 <- "Click again to set where your transect ends,";
+            m5 <- "and start sampling by clicking 'Sample' once.";
+            m6 <- "Keep your transect inside the dotted box! Click to start.";
             text(x = 50, y = 75, labels = m1, cex = 2);
             text(x = 50, y = 60, labels = m2, cex = 2);
             text(x = 50, y = 50, labels = m3, cex = 2);
@@ -93,7 +93,7 @@ server <- function(input, output, session) {
                         border = 1, lty = "dotted");
                 points(x = v$click1$x, y = v$click1$y, pch = 20, 
                        col = "#D55E00", 
-                       cex = 3)
+                       cex = 3);
             }
             if (!is.null(v$vals[1])){
                 par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
@@ -106,7 +106,7 @@ server <- function(input, output, session) {
                 points(x = xvals, y = yvals, col = "#D55E00", cex = 3,
                        pch = 20);
                 points(x = xvals, y = yvals, type = "l", col = "#D55E00", 
-                       lwd = 3)
+                       lwd = 3);
                 l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
                 l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             }
@@ -122,8 +122,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:2], y = l$y[1:2], pch = 20, col = "#0072B2", 
@@ -160,8 +160,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:3], y = l$y[1:3], pch = 20, col = "#0072B2", 
@@ -198,8 +198,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:4], y = l$y[1:4], pch = 20, col = "#0072B2", 
@@ -236,8 +236,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:5], y = l$y[1:5], pch = 20, col = "#0072B2", 
@@ -274,8 +274,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:6], y = l$y[1:6], pch = 20, col = "#0072B2", 
@@ -312,8 +312,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:7], y = l$y[1:7], pch = 20, col = "#0072B2", 
@@ -350,8 +350,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:8], y = l$y[1:8], pch = 20, col = "#0072B2", 
@@ -388,8 +388,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:9], y = l$y[1:9], pch = 20, col = "#0072B2", 
@@ -426,8 +426,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:10], y = l$y[1:10], pch = 20, col = "#0072B2", 
@@ -464,8 +464,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:11], y = l$y[1:11], pch = 20, col = "#0072B2", 
@@ -502,8 +502,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:12], y = l$y[1:12], pch = 20, col = "#0072B2", 
@@ -540,8 +540,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:13], y = l$y[1:13], pch = 20, col = "#0072B2", 
@@ -578,8 +578,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:14], y = l$y[1:14], pch = 20, col = "#0072B2", 
@@ -616,8 +616,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:15], y = l$y[1:15], pch = 20, col = "#0072B2", 
@@ -654,8 +654,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:16], y = l$y[1:16], pch = 20, col = "#0072B2", 
@@ -692,8 +692,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:17], y = l$y[1:17], pch = 20, col = "#0072B2", 
@@ -730,8 +730,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:18], y = l$y[1:18], pch = 20, col = "#0072B2", 
@@ -768,8 +768,8 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
             points(x = l$x[1:19], y = l$y[1:19], pch = 20, col = "#0072B2", 
@@ -806,11 +806,11 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3)
-            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3)
+            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:19], y = l$y[1:19], pch = 20, col = "#0072B2", 
+            points(x = l$x[1:20], y = l$y[1:20], pch = 20, col = "#0072B2", 
                    type = "b", cex = 4);
             points(x = c(v$vals[1], l$x[20]), y = c(v$vals[2], l$y[20]), 
                    col = "#0072B2", type = "l", lwd = 5);
@@ -846,10 +846,10 @@ server <- function(input, output, session) {
             m3 <- paste("The end of your transect was: X = ", 
                         round(v$vals[3], digits = 1), ", Y = ", 
                         round(v$vals[4], digits = 1));
-            m4 <- "Record these numbers for later use."
-            m5 <- "Repeat this exercise until you have completed 3 transects,"
-            m6 <- "then continue to the data analsis portion of the project."
-            m7 <- "http://bradduthie.github.io/wildlife_sampling_mini-project"
+            m4 <- "Record these numbers for later use.";
+            m5 <- "Repeat this exercise until you have completed 3 transects,";
+            m6 <- "then continue to the data analsis portion of the project.";
+            m7 <- "http://bradduthie.github.io/wildlife_sampling_mini-project";
             text(x = 50, y = 75, labels = m1, cex = 2);
             text(x = 50, y = 60, labels = m2, cex = 2);
             text(x = 50, y = 50, labels = m3, cex = 2);
