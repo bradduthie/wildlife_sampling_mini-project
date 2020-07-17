@@ -3,14 +3,14 @@ title: "SCIU3FB Wildlife sampling mini-project"
 author: "Brad Duthie"
 output:
   html_document: default
-  word_document: default
+  word_document:
+    reference_docx: docx_template.docx
   pdf_document: default
+linkcolor: blue
 ---
 
 Objective of wildlife sampling mini-project
 ================================================================================
-
-
 
 ```{css, echo = FALSE}
 table {
@@ -56,15 +56,17 @@ A, 0.22
 A, 0.59
 ```
 
-It is important to recognise that your ability to see a *B. bbqstick* is going to depend on how far it is away from the transect. While you will probably always be able to see a *B. bbqstick* when it is right on top of the transect, you might never be able to see one that is over 10 metres away. Hence, it is reasonable to assume that your ability to observe and record a *B. bbqstick* will decrease as it gets farther from the transect. After collecting data on *B. bbqstick* distances, we will use a statistical model to account for this decrease in *B. bbqstick* observation so that we can more accurately estimate *B. bbqstick* density. It will not be necessary to understand the mathematical details of the model, but it is important that you understand what the model is doing and why it improves our estimate of *B. bbqstick* density.
+It is important to recognise that your ability to see a *B. bbqstick* is going to depend on how far it is away from the transect. While you will probably always be able to see a *B. bbqstick* when it is right on top of the transect, you might never be able to see one that is over 10 metres away. Hence, it is reasonable to assume that your ability to observe and record a *B. bbqstick* will decrease as it gets farther from the transect. After collecting data on *B. bbqstick* distances, we will use a statistical model to account for this decrease in *B. bbqstick* observation so that we can more accurately estimate *B. bbqstick* density. It will not be necessary to understand the mathematical details of the model, but it is important that you understand what the model is doing and why it improves our estimate of *B. bbqstick* density. 
+
+Continue on if you are doing your sampling [online](#online), or skip ahead if you are doing your sampling [on campus](#campus). When you are finished sampling and have recorded your measurements of *B. bbqstick* distances from the transect, you can move on to the [data analysis instructions](https://bradduthie.github.io/wildlife_sampling_mini-project/analysis.html).
 
 
-Protocol for sampling along a virtual transect (online)
+Protocol for sampling along a virtual transect (online) {#online}
 ================================================================================
 
 If you are unable to sample along a physical transect on campus, you can simulate the process of data collection in [an online application](https://bradduthie.shinyapps.io/wildlife_sampling_mini-project/). When click the link to this application, you will see a brown box representing a virtual field, and some instructions:
 
-> You are in field location number: [YOUR FIELD NUMBER]. Write this number down, then click anywhere in the field to set where your transect starts. Click again to set where your transect ends, and start sampling by clicking 'Sample' once. **Keep your transect inside the dotted box! Click to start.
+> You are in field location number: [YOUR FIELD NUMBER]. Write this number down, then click anywhere in the field to set where your transect starts. Click again to set where your transect ends, and start sampling by clicking 'Sample' once. **Keep your transect inside the dotted box!** Click to start.
 
 After you have written down your field number, you can begin placing your transects. Make sure that your first click is inside the dotted box (if you click somewhere else by accident, just click 'Reset' to go to a new field). After you click, you should see the text dissappear, and an orange dot in the location where you clicked; this is the start of your transect. You can select anywhere else inside the dotted box to set the end of your transect. If you do not like the transect you have made, you can click 'Reset' and start over.
 
@@ -75,11 +77,13 @@ Once you have the start and end points of your transect, click 'Sample' to start
 After recording your X and Y starting and ending locations, click 'Reset' to repeat the exercise. Do this until you have three transects of data, which you can label 'A', 'B', and 'C'. You will use these in you data analysis.
 
 
-Protocol for sampling along a physical transect (on campus)
+Protocol for sampling along a physical transect (on campus) {#campus}
 ================================================================================
 
+The protocol for sampling along the physical transect on campus follows the exact same logic as sampling from the virtual transect, as described above. You will work in groups of two or three.  When you arrive to the field site on campus, you will see three transects; the starts and ends of each will be marked by flags. First, measure the length of the transect from flag to flag with a tape measure. Next, pick a starting flag (it does not matte which), then start walking along the transect toward the end flag. As you walk, look perpendicular to the transect to observe *B. bbqstick* individuals (these are plain wooden sticks stuck into the ground; ask your instructor if you are unsure what one looks like). When you observe a *B. bbqstick*, measure its distance from the transect and record the transect name (A, B, or C) and your measurement distance. Continue this method of observation until you have reached the end of the transect. Next, move to the next transect and repeat the sampling procedure. Continue sampling until your group has completed all three transects.
 
 
+> You are now ready to move on to the [data analysis instructions](https://bradduthie.github.io/wildlife_sampling_mini-project/analysis.html).
 
 
 
