@@ -1,18 +1,17 @@
 ---
 title: "Wildlife sampling mini-project"
 author: "Brad Duthie, Lynsey Bunnefeld"
-subtitle: "HTML Version: https://bradduthie.github.io/wildlife_sampling_mini-project/analysis.html"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 link-citations: yes
 linkcolor: blue
 bibliography: miniproject.bib
 ---
 
-**Estimating the density of populations is a key objective in a lot of ecological research. Accurate estimation of population density can allow us to better monitor managed populations, understand how population density relates to other variables such as habitat, and better understand interactions between species (e.g., mutualism, competition, predation).**
+**Estimating the density of populations is a key objective in a lot of ecological research. Accurate estimation of population density can allow us to better monitor managed populations, understand how population density relates to other variables such as habitat, and better understand interactions between species (e.g., mutualism, competition, predation). Note that these notes can be accessed in [HTML](https://bradduthie.github.io/wildlife_sampling_mini-project/analysis.html), [PDF](https://bradduthie.github.io/wildlife_sampling_mini-project/analysis.pdf), or [DOCX](https://bradduthie.github.io/wildlife_sampling_mini-project/analysis.docx) form.**
 
-In the wildlife sampling mini-project, we practiced distance sampling in the field. We did this using three transects, the starts and ends of which were marked by red flags. In sampling, you should have walked along the transect in a straight line looking for BBQstick (*BBQstick bbqstick*) individuals perpendicular to the transect. Upon observation, you should have recorded the distance in metres of the BBQstick from the transect. The data you collected should therefore look similar to the below.
+In the wildlife sampling mini-project, we practiced distance sampling in the field or using [an online simulation](https://bradduthie.github.io/wildlife_sampling_mini-project/index). We did this using three transects, the starts and ends of which were marked by flags. In sampling, you should have walked along the transect in a straight line looking for BBQstick (*BBQstick bbqstick*) individuals perpendicular to the transect. Upon observation, you should have recorded the distance in metres of the BBQstick from the transect. The data you collected should therefore look similar to the below.
 
 ```{r, echo = FALSE}
 library(knitr);
@@ -20,23 +19,70 @@ dat <- read.csv("MyTransect.csv", header = TRUE);
 kable(head(dat));
 ```
 
-To get started with the analysis, you need to create a [CSV file](https://en.wikipedia.org/wiki/Comma-separated_values) with the collected data. You can do this using a spreadsheet program such as MS Excel. To get started, in the first row of cells, write your column headings 'Transect' and 'Distance'. Each row that follows will be a unique observation that you made of a BBQstick. For example, the first BBQstick observation above was made in transect `r dat[1,1]`, and was at a distance of `r dat[1,2]` metres away from the transect line. Your exact values will be different. When you fill in all of your values in Excel, do not worry about formatting (e.g., borders and shading) -- the CSV file will not save these anyway. Once you are done typing in all of the names and values into your file, save the file as a CSV. You are now ready to load your data into R and begin your analysis.
+To get started with the analysis, you need to create a [CSV file](https://en.wikipedia.org/wiki/Comma-separated_values) with the collected data. You can do this using a spreadsheet program such as MS Excel. To get started, in the first row of cells, write your column headings 'Transect' and 'Distance'. Each row that follows will be a unique observation that you made of a BBQstick. For example, the first BBQstick observation above was made in transect `r dat[1,1]`, and was at a distance of `r dat[1,2]` metres away from the transect line. Your exact values will be different. When you fill in all of your values in Excel, do not worry about formatting (e.g., borders and shading) -- the CSV file will not save these anyway. Once you are done typing in all of the names and values into your file, save the file as a CSV (e.g., "MyTransect.csv"). It should look something like the below.
+
+![](CSV_screenshot.png)
+
+Notice that the top row includes the headers (each a single word with no spaces), and all of the information is in the first two columns of the spreadsheet ('A' and 'B'). This will help avoid any errors in R later when trying to read in the CSV file. You are now ready to load your data into R and begin your analysis.
+
+Why do we need a statistical model to estimate population density?
+================================================================================
+
+Our objective is to estimate population density; we want to know how many BBQsticks there are in our sampling area. We could try to count every individual, but often this is just not possible. Instead, what we will do is sample just along one linear transect, and make some reasonable assumptions about the uncertainty of our sampling at different distances from this transect. First, we assume that we can be certain to find any individuals directly on the transect (i.e., at zero distance from it). Second, we assume that as the distance from the transect increases, the probability that we will miss an individual increases (i.e., the BBQsticks become more difficult to detect when they are farther away).
+
+
+```{r, echo = FALSE}
+par(mar=c(0,0,0,0));
+plot(x = 0, y = 0, type = "n", xlim = c(0, 40), ylim = c(0, 40), 
+     xaxt = "n", yaxt = "n", xlab = "", ylab = "");
+arrows(x0 = 0, x1 = 40, y0 = 4, y1 = 4, length = 0.1);
+points(x = c(0, 0), y = c(4, 35), pch = 20, cex = 1.5, col = "red");
+points(x = c(0, 0), y = c(4, 35), type = "l", lwd = 2, col = "red");
+xx <- runif(30, 4, 38);
+yy <- runif(30, 8, 38);
+points(x = xx, y = yy, col = "green", pch = 20, cex = 1.25);
+xp <- exp(-xx/40);
+xd <- rbinom(n = length(xx), size = 1, prob = xp);
+points(x = xx, y = yy, col = "green", pch = 20, cex = 1.25);
+for(i in 1:length(xp)){
+  if((xd[i] == 1 & xx[i] < 30) | xx[i] < 14){
+    points(x = xx[i], y = yy[i], cex = 1.25);
+  }
+}
+text(x = 2, y = 2, labels = "Start", col = "red");
+text(x = 2, y = 38, labels = "End", col = "red");
+text(x = 3, y = 7.2, labels = "Easy");
+text(x = 3, y = 6, labels = "to");
+text(x = 3, y = 4.8,  labels = "see");
+text(x = 35, y = 7.2, labels = "Hard");
+text(x = 35, y = 6, labels = "to");
+text(x = 35, y = 4.8,  labels = "see");
+text(x = 1, y = 20, labels = "Transect", col = "red", srt = -90, 
+     cex = 1.5);
+text(x = 20, y  = 2, labels = "Distance", cex = 1.5);
+```
+
+The figure above shows the general idea. The BBQsticks are shown as green dots that are scattered throughout the landscape. The green dots with black circles around them represent individuals that have been successfully detected, while the green dots without black circles around them are individuals that have been missed. Notice that the ones that are father away from the transect (the red line on the left) are not as often detected as ones close to the transect. This should make intuitive sense; as the distance away from the transect increases, the BBQsticks become more difficult to see. Hence, as distance increases, the probability that we detect *B. bbqstick* individuals decreases. **The point of the statistical model is to estimate how detection probability decreases with distance from the transect, so we can account for this decrease when estimating population density.**
 
 What is R, and why are we using it?
 ================================================================================
 
-The computer programming language R is a powerful and very widely-used tool among biologists for analysing data. You can use it to analyse and plot data, run computer simulations, or even write slides, papers, or books. The R programming language is completely free and open source, as is the popular [Rstudio](https://www.rstudio.com/) software for using it. It specialises in statistical computing, which is part of the reason for its popularity among scientists. 
+The computer programming language R is a powerful and very widely-used tool among biologists for analysing data. You can use it to analyse and plot data, run computer simulations, or even write slides, papers, or books (the document that you are now reading was written in R using a language called 'Rmarkdown'). The R programming language is completely free and open source, as is the popular [Rstudio](https://www.rstudio.com/) software for using it. It specialises in statistical computing, which is part of the reason for its popularity among scientists. 
 
 Another reason for its popularity is its versatility, and the ease with which new techniques can be shared. Imagine that you develop a new method for analysing data, such as the method that we are using in this mini-lab as developed in @Chandler2011 ([PDF](https://esajournals.onlinelibrary.wiley.com/doi/pdf/10.1890/10-2433.1)). If you want other researchers to be able to use your method in their research, then you could write your own software from scratch for them to install and use. But doing this would be very time consuming, and a lot of that time would likely be spent writing the graphical user interface and making sure that your program worked across platforms (e.g., on Windows and Mac). Worse, once written, there would be no easy way to make your program work with other statistical software should you need to integrate different analyses or visualisation tools (e.g., plotting data). To avoid all of this, you could instead just present your new method for data analysis and let other researchers write their own code for implementing it. But not all researchers will have the time or expertise to do this.
 
-Instead, R allows researchers to write new tools for data analysis using simple coding scripts. These scripts are organised into R packages, which can be uploaded by authors to the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/), then downloaded by users with a single command in R. This way, there is no need for completely different software to be used for different analyses -- all analyses can be written and run in R.
+Instead, R allows researchers to write new tools for data analysis using simple coding scripts. These scripts are organised into R "packages", which can be uploaded by researchers to the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/), then downloaded by users with a single command in R. This way, there is no need for completely different software to be used for different analyses -- all analyses can be written and run in R.
 
-**The downside to all of this** is that learning R can be a bit daunting at first. Running analyses is not done by pointing and clicking on icons as in Excel, SigmaPlot, or JMP. You need to use code. In this mini-lab, we will start with the very basics and work our way up to analysing the data collected from the field to estimate total BBQstick abundance.
+**The downside to all of this** is that learning R can be a bit daunting at first. Running analyses is not done by pointing and clicking on icons as in Excel, SigmaPlot, or JMP. You need to use code. In this mini-lab, we will start with the very basics and work our way up to analysing the data collected from the field to estimate total BBQstick density.
 
 Getting started in R, and the basics
 ================================================================================
 
-The first thing to do is [download Rstudio](https://www.rstudio.com/) if you have not already. When you open Rstudio, you will see several windows open, including a console. The console will look something like the below.
+There are two ways that you can use R to do this mini-project. The first way is to download R and Rstudio on your own computer. Both R and Rstudio are free to download and use, and work on any major operating system (Windows, Mac, and Linux). To download R, go to [this page on the Comprehensive R Archive Network](https://cran.rstudio.com/) and follow the instructions for your operating system (OS). To download Rstudio, go to [this page on the Rstudio website](https://rstudio.com/products/rstudio/download/#download) and choose the appropriate download for your operating system.
+
+If you cannot or do not want to download R and Rstudio on your own computer, then you can still use both by going to the [Rstudio Cloud](https://rstudio.cloud/) and running Rstudio from a browser such as Firefox or Chrome. You will need to click the green "Get Started" button and sign up for a free account. I have made a video of myself [signing up for Rstudio cloud](https://www.stir.ac.uk/) using my University of Stirling email, so you can follow the steps shown in the video if you need help signing up.
+
+When you open Rstudio either on your own computer or the cloud, you will see several windows open, including a console. The console will look something like the below.
 
 ```
 R version 3.6.1 (2019-07-05) -- "Action of the Toes"
@@ -115,7 +161,7 @@ object_1 <- list(vector_1, 54, "string of words");
 object_1;
 ```
 
-Play around a bit with R before moving on, and try to get confortable using the console. When you are ready, download the file 'SCIU3FB_wildlife_sampling_miniproject.R' from Canvas, then go to the toolbar in Rstudio and select File > Open File to open it into Rstudio. Alternatively, I have added all of the code to the end of this document, so you could also copy it [here](#appendix) and paste into a new Rscript (select File > New File > R Script). What follows here walks you through the code step by step.
+Play around a bit with R before moving on, and try to get comfortable using the console. When you are ready, download the file 'SCIU3FB_wildlife_sampling_miniproject.R' from Canvas, then go to the toolbar in Rstudio and select File > Open File to open it into Rstudio. Alternatively, I have added all of the code to the end of this document, so you could also copy it [here](#appendix) and paste into a new Rscript (select File > New File > R Script). The rest of these notes will walk you through the code step by step.
 
 Installing the required R package
 ================================================================================
@@ -137,13 +183,21 @@ library("unmarked"); # Other packages that 'unmarked' needs will also load
 Reading in the collected data
 ================================================================================
 
-Now we need to read in the data collected from out in the field. Make sure that the file is in the same place as your current working directory (`getwd()`). I have named my file 'MyTransect.csv', but yours might be different.
+Now we need to read in the data collected from out in the field (or from the [online simulation](https://bradduthie.github.io/wildlife_sampling_mini-project/index)). Make sure that the file is in the same place as your current working directory (`getwd()`). **If you are using a version of Rstudio that you downloaded to your own computer,** then you can change the working directory by going to the top menu and selecting `Session > Set Working Directory > Choose Directory ...`. Your screen should look something like the figure below.
+
+![](setwd.png)
+
+Make sure that you choose the directory on your computer where your CSV file is located. **If you are using Rstudio on the website [rstudio.cloud](https://rstudio.cloud/),** then you can upload your file from your computer to the cloud. TO do this, find the `Files` tab in the lower right area of the window, then select `Upload` and find your CSV file to upload it by clicking `Browse...` under the `File to upload:` text. The figure below shows where you can find the `Upload` button.
+
+![](upload_CSV.png)
+
+I have named my file 'MyTransect.csv', but yours might be different. Once you have selected the correct working directory or uploaded your CSV file to the cloud, you can read your data into the console using the line below.
 
 ```{r, echo = TRUE}
 dat <- read.csv(file = "MyTransect.csv", header = TRUE);
 ```
 
-Note above that I have used the 'read.csv' function to read the CSV file into the variable `dat` in R. To make sure that everything looks correct, you can type `dat` in the console to see all of the data print out. I will use the 'head' function below to just print off the first six rows.
+Note above that I have used the 'read.csv' function to read the CSV file into the variable `dat` in R. To make sure that everything looks correct, you can type `dat` in the console to see all of the data printed out. I will use the 'head' function below to just print off the first six rows.
 
 ```{r, echo = TRUE}
 head(dat);
@@ -167,12 +221,6 @@ Note that if you are not sure what a function does, you can use the 'help' funct
 help(attributes); # See 'attributes' documentation: ?attributes also works
 ```
 
-We can also summarise the data visually using the generic 'plot' function. R will recognise the structure of the data and create a box and whisker plot that summarises the distances for each of our three transects.
-
-```{r, echo = TRUE, out.height = '35%'}
-plot(dat);
-```
-
 We can also make a histogram of the distances that we collected. This is a good way to check for outliers. If you end up with a distance that is much too far to be realistic, then check to make sure that you did not type it into Excel incorrectly.
 
 ```{r, echo = TRUE}
@@ -180,16 +228,16 @@ dat_dists <- dat$Distance; # Gets values from the 'Distance' column
 hist(x = dat_dists,        # This is all that is really needed
      main = "",            # Everything below just makes it look nice
      xlab = "Distances",
-     cex.lab = 1.5,
+     cex.lab = 1.25,
      col = "grey");
 ```
 
-If everything looks good, then we can move on with the analysis.
+The x-axis above shows distance intervals within which observations were collected. The y-axis shows how many observations were collected within each interval, as illustrated by the height of each bar. In the above example, we can see that more observations were made at low distances than high distances. Since looks good (i.e., no distances that are much to large, or negative), then we can move on with the analysis.
 
 Analysis using the 'unmarked' R package
 ================================================================================
 
-To get started, we first need to divide our data into bins based on distance classes. If we assume that the furthest distance that we can see is 10 metres, then we can use five classes. These classes will start at 0 m and end at 10 m. If your data has observations further than 10 m from the transect line, then try to make the necessary adjustments to the code to include these further distance classes. 
+To get started, we first need to divide our data into bins based on distance classes. If we assume that the furthest distance that we can see is 10 metres, then we can use five classes. These classes will start at 0 m and end at 10 m. If your data include observations further than 10 m from the transect line, then try to make the necessary adjustments to the code to include these further distance classes. 
 
 ```{r, echo = TRUE}
 yDat <- formatDistData(dat, distCol = "Distance", transectNameCol = "Transect",
@@ -204,7 +252,17 @@ yDat;
 
 Each row in the above corresponds to each transect letter (`r rownames(yDat)`), and each column corresponds to a different interval, the first being from zero to two metres away from the transect (`r colnames(yDat)[1]`), the second being from two to four metres away from the transect (`r colnames(yDat)[2]`), and so forth. 
 
-Next, we need to set the length of each transect. Remember to make sure that the order of transect lengths is correct here (i.e., that the first element in the variable is transect 'A', then 'B', then 'C').
+Next, we need to set the length of each transect. If you sampled your data in the field, then you should have measured your transect length. If you sampled your data using the online simulation, then you can apply the Pythagorean theorem using the $X$ and $Y$ values from the start and end of your transect to calculate the transect length.
+
+$$Length = \sqrt{(X_{start} - X_{end})^2 + (Y_{start} - Y_{end})^2}$$
+
+We can actually do all of the calculations in R. Below is an example where the start of my transect was $X = 15.2, Y = 63$, and the end of my transect was $X = 42.4, Y = 56.3$.
+
+```{r}
+sqrt( (15.2 - 42.4)^2 + (63 - 56.3)^2 ); # Calculates transect length
+```
+
+Once you have all three of the transect lengths, you will need to store them in a variable like I have done below. Remember to make sure that the order of transect lengths is correct here (i.e., that the first element in the variable is transect 'A', then 'B', then 'C').
 
 ```{r, echo = TRUE}
 tr_length <- c(28, 28, 60); # Note: Your transect lengths might differ
