@@ -1,10 +1,11 @@
 ---
 title: "Wildlife sampling mini-project"
 author: "Brad Duthie, Lynsey Bunnefeld"
-output:
-  html_document: default
-  pdf_document: default
 link-citations: yes
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
 linkcolor: blue
 bibliography: miniproject.bib
 ---
@@ -300,7 +301,7 @@ hist(x = umf, xlab = "Distance (m)", main = "", col = "grey");
 Fitting our model
 ================================================================================
 
-We are finally ready to fit a model to the data. Since we have no covariates, we will just fit a null model, but you can read @Royle2004 or the unmarked R package [Distance sampling analysis in unmarked](https://cran.r-project.org/web/packages/unmarked/vignettes/distsamp.pdf) vignette to think about alternative models that we could have fitted. The model below recognises that detection probability declines with distance from the transect line (i.e., as individuals get farther away from the transect, it is more likely that you will miss them). The model can be used to 'correct' for the missed individuals and give us an estimate of what the true number of individuals would be at the site had those individuals been successfully observd.
+We are finally ready to fit a model to the data. Since we have no covariates, we will just fit a null model, but you can read @Royle2004 or the unmarked R package [Distance sampling analysis in unmarked](https://cran.r-project.org/web/packages/unmarked/vignettes/distsamp.pdf) vignette to think about alternative models that we could have fitted. The model below recognises that detection probability declines with distance from the transect line (i.e., as individuals get farther away from the transect, it is more likely that you will miss them). The model can be used to 'correct' for the missed individuals and give us an estimate of what the true number of individuals would be at the site had those individuals been successfully observed.
 
 ```{r, echo = TRUE}
 hn_Null <- distsamp(formula = ~1~1, data = umf, keyfun = "halfnorm", 
@@ -317,7 +318,7 @@ plot(gxhn_fun, 0, 10,xlab="Distance (m)",ylab="Detection probability",
      lwd = 2, cex.lab = 1.25, cex.axis = 1.25);
 ```
 
-If you want, you can plot the model and the histogram side by side with the code below.
+If you want, you can plot the model and the histogram side by side with the code below. If you are using Rstudio on your own computer, then you can save this image by going to the plot tab and selecting `Export > Save as Image...`. If you are using Rstudio on the cloud, then you can save the image by right clicking on it and selecting `Save as Image...`.
 
 ```{r, eval = FALSE}
 par(mfrow = c(1, 2)); # This creates a new plotting environment with two columns
@@ -371,7 +372,7 @@ In the above, imagine that the red line is the transect. The total area of the s
 tr_length;
 ```
 
-The area of a rectangle is its length times its width. Since the width is known to be 20 m (twice the visible distance), we can multiply `tr_length` by 20 to get the total area of each site.
+The area of a rectangle is its length times its width. Since the width is known to be 20 m (twice the visible distance), we can multiply `tr_length` by 20 to get the total area of each site (note, this is also fine if you collected your data in the online simulation; just assume that one unit equals one metre).
 
 ```{r, echo = TRUE}
 plotArea_m <- tr_length * 20;
