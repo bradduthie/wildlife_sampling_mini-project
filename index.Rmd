@@ -2,9 +2,9 @@
 title: "SCIU3FB Wildlife sampling mini-project"
 author: "Brad Duthie"
 output:
-  html_document: default
   word_document:
     reference_docx: docx_template.docx
+  html_document: default
   pdf_document: default
 linkcolor: blue
 bibliography: miniproject.bib
@@ -30,7 +30,15 @@ There are many situations in ecology and management in which we want to know how
 
 The sampling method, statistical techniques, and software that you use here have been recently applied in the conservation of species including birds [@Dawrueng2017] and [amphibians](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4224529/pdf/ece30004-3538.pdf)  [@Petitot2014], and mammals such as [elephants](https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0059469&type=printable) [@Maisels2013], [grizzly bears](https://www.sciencedirect.com/science/article/abs/pii/S0006320716302440) [@Steenweg2016], and [gibbons](https://onlinelibrary.wiley.com/doi/pdf/10.1002/ajp.22508?casa_token=9owuBS_YYN0AAAAA:Sce_5asS5CxbjTTEE8f1a0Gz9ec2cEGx_-skUMrSKD-ejba1-GqO2kLO1W1Ms_D3CM-2J-cHcCU7cQ) [@Hallam2016]. To make it easier to sample and explain the key methods, here we will use a fictional species.
 
-Imagine that we want to know the density of a species that occurs throughout a large landscape. We will call this hypothetical species *BBQstick bbqstick* (for reasons that will become clear after you read the on campus protocol below). We cannot count every *B. bbqstick*, but we can develop a protocol that samples some of them in a small area, then uses that sample to make inferences about the number of *B. bbqsticks* in the larger landscape. We will do this by sampling along a linear transect. This linear transect will have a fixed starting point, and a fixed ending point. From the starting point, we will walk slowly toward the ending point, looking to the side in both directions as we do (i.e., looking perpendicular to the transect in both directions; see the figure below). 
+Imagine that we want to know the density of a species that occurs throughout a large landscape. We will call this hypothetical species *BBQstick bbqstick*.  The image below shows a large sample of them; in their natural habitat on the University of Stirling campus, they typically stand vertically out of the ground.
+
+\vspace{4mm}
+
+![](bbqstick.jpg)
+
+\vspace{4mm}
+
+We cannot count every *B. bbqstick*, but we can develop a protocol that samples some of them in a small area, then uses that sample to make inferences about the number of *B. bbqsticks* in the larger landscape. We will do this by sampling along a linear transect. This linear transect will have a fixed starting point, and a fixed ending point. From the starting point, we will walk slowly toward the ending point, looking to the side in both directions as we do (i.e., looking perpendicular to the transect in both directions; see the figure below). 
 
 
 ```{r, echo = FALSE, fig.height = 3}
