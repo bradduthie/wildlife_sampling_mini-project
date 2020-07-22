@@ -1,11 +1,11 @@
 ---
-title: "Wildlife sampling mini-project"
+title: "Wildlife sampling mini-project: analysis"
 author: "Brad Duthie, Lynsey Bunnefeld"
 link-citations: yes
 output:
-  word_document: default
   pdf_document: default
   html_document: default
+  word_document: default
 linkcolor: blue
 bibliography: miniproject.bib
 ---

@@ -1,11 +1,11 @@
 ---
-title: "SCIU3FB Wildlife sampling mini-project"
+title: "SCIU3FB Wildlife sampling mini-project: sampling"
 author: "Brad Duthie"
 output:
+  pdf_document: default
   word_document:
     reference_docx: docx_template.docx
   html_document: default
-  pdf_document: default
 linkcolor: blue
 bibliography: miniproject.bib
 ---
