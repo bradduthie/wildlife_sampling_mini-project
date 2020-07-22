@@ -2,15 +2,15 @@
 title: "SCIU3FB Wildlife sampling mini-project: sampling"
 author: "Brad Duthie"
 output:
-  pdf_document: default
+  html_document: default
   word_document:
     reference_docx: docx_template.docx
-  html_document: default
+  pdf_document: default
 linkcolor: blue
 bibliography: miniproject.bib
 ---
 
-**Please note that is document can be observed in [HTML](https://bradduthie.github.io/wildlife_sampling_mini-project/index), [PDF](https://bradduthie.github.io/wildlife_sampling_mini-project/sampling.pdf), and [DOCX](https://bradduthie.github.io/wildlife_sampling_mini-project/sampling.docx) form. All of the documents in these links are identical.**
+**Please note that is document can be observed in [HTML](https://bradduthie.github.io/wildlife_sampling_mini-project/index), [PDF](https://bradduthie.github.io/wildlife_sampling_mini-project/index.pdf), and [DOCX](https://bradduthie.github.io/wildlife_sampling_mini-project/index.docx) form. All of the documents in these links are identical.**
 
 Objective of wildlife sampling mini-project
 ================================================================================
