@@ -78,20 +78,24 @@ server <- function(input, output, session) {
             m3 <- "the field to set where your transect starts.";
             m4 <- "Click again to set where your transect ends,";
             m5 <- "and start sampling by clicking 'Sample' once.";
-            m6 <- "Keep your transect inside the dotted box! Click to start.";
-            text(x = 50, y = 75, labels = m1, cex = 2);
-            text(x = 50, y = 60, labels = m2, cex = 2);
-            text(x = 50, y = 50, labels = m3, cex = 2);
-            text(x = 50, y = 40, labels = m4, cex = 2);
-            text(x = 50, y = 30, labels = m5, cex = 2);
-            text(x = 50, y = 15, labels = m6, cex = 2, col = "red");
+            m6 <- "Keep your transect inside the dotted box!";
+            m7 <- "(you can always click 'Reset' to start over)";
+            m8 <- "Click to start."
+            text(x = 50, y = 85, labels = m1, cex = 2);
+            text(x = 50, y = 70, labels = m2, cex = 2);
+            text(x = 50, y = 60, labels = m3, cex = 2);
+            text(x = 50, y = 50, labels = m4, cex = 2);
+            text(x = 50, y = 40, labels = m5, cex = 2);
+            text(x = 50, y = 30, labels = m6, cex = 2, col = "red");
+            text(x = 50, y = 20, labels = m7, cex = 2, col = "red");
+            text(x = 50, y = 10, labels = m8, cex = 2, col = "red");
             if (!is.null(v$click1$x)){
                 par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
                 plot(x = 0, y = 0, type = "n", xlim = c(0, 100), 
                      ylim = c(-10, 100), xaxt = "n", yaxt = "n", asp = 1);
                 polygon(x = c(0, 0, 100, 100), y = c(0, 100, 100, 0), 
                         border = 1, lty = "dotted");
-                points(x = v$click1$x, y = v$click1$y, pch = 20, 
+                points(x = v$click1$x, y = v$click1$y, pch = 18, 
                        col = "#D55E00", 
                        cex = 3);
             }
@@ -104,11 +108,15 @@ server <- function(input, output, session) {
                 xvals <- c(v$vals[1], v$vals[3]);
                 yvals <- c(v$vals[2], v$vals[4]);
                 points(x = xvals, y = yvals, col = "#D55E00", cex = 3,
-                       pch = 20);
+                       pch = 18);
                 points(x = xvals, y = yvals, type = "l", col = "#D55E00", 
                        lwd = 3);
                 l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
                 l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
+                m1  <- "Now click 'Sample' to take a step and record.";
+                m2  <- "Each 'Sample' click moves forward on the transect.";
+                text(x = 50, y = -3, cex = 2, col = "red", labels = m1);
+                text(x = 50, y = -9, cex = 2, col = "red", labels = m2);
             }
         }
         if(s$go == 1 & !is.null(v$vals[1])){
@@ -122,14 +130,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:2], y = l$y[1:2], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[2]), y = c(v$vals[2], l$y[2]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[1:2]), y = mean(l$y[1:2]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[1:2]), y = mean(l$y[1:2]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[1], l$x[2], l$y[1], l$y[2], 
                                      tlocs_x, tlocs_y);
@@ -147,6 +155,8 @@ server <- function(input, output, session) {
                 }else{
                     text(x = 10, y = -5, labels = "Distances: (none)", cex = 2);
                 }
+                text(x = 50, y = -12, cex = 1.5, col = "red",
+                     labels = "(The blue dot shows where you are standing)");
             }
         }
         if(s$go == 2 & !is.null(v$vals[1])){
@@ -160,14 +170,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:3], y = l$y[1:3], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[3]), y = c(v$vals[2], l$y[3]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[2:3]), y = mean(l$y[2:3]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[2:3]), y = mean(l$y[2:3]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[2], l$x[3], l$y[2], l$y[3], 
                                      tlocs_x, tlocs_y);
@@ -198,14 +208,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:4], y = l$y[1:4], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[4]), y = c(v$vals[2], l$y[4]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[3:4]), y = mean(l$y[3:4]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[3:4]), y = mean(l$y[3:4]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[3], l$x[4], l$y[3], l$y[4], 
                                      tlocs_x, tlocs_y);
@@ -236,14 +246,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:5], y = l$y[1:5], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[5]), y = c(v$vals[2], l$y[5]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[4:5]), y = mean(l$y[4:5]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[4:5]), y = mean(l$y[4:5]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[4], l$x[5], l$y[4], l$y[5], 
                                      tlocs_x, tlocs_y);
@@ -274,14 +284,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:6], y = l$y[1:6], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[6]), y = c(v$vals[2], l$y[6]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[5:6]), y = mean(l$y[5:6]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[5:6]), y = mean(l$y[5:6]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[5], l$x[6], l$y[5], l$y[6], 
                                      tlocs_x, tlocs_y);
@@ -312,14 +322,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:7], y = l$y[1:7], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[7]), y = c(v$vals[2], l$y[7]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[6:7]), y = mean(l$y[6:7]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[6:7]), y = mean(l$y[6:7]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[6], l$x[7], l$y[6], l$y[7], 
                                      tlocs_x, tlocs_y);
@@ -350,14 +360,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:8], y = l$y[1:8], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[8]), y = c(v$vals[2], l$y[8]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[7:8]), y = mean(l$y[7:8]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[7:8]), y = mean(l$y[7:8]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[7], l$x[8], l$y[7], l$y[8], 
                                      tlocs_x, tlocs_y);
@@ -388,14 +398,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:9], y = l$y[1:9], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[9]), y = c(v$vals[2], l$y[9]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[8:9]), y = mean(l$y[8:9]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[8:9]), y = mean(l$y[8:9]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[8], l$x[9], l$y[8], l$y[9], 
                                      tlocs_x, tlocs_y);
@@ -426,14 +436,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:10], y = l$y[1:10], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[10]), y = c(v$vals[2], l$y[10]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[9:10]), y = mean(l$y[9:10]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[9:10]), y = mean(l$y[9:10]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[9], l$x[10], l$y[9], l$y[10], 
                                      tlocs_x, tlocs_y);
@@ -464,14 +474,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:11], y = l$y[1:11], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[11]), y = c(v$vals[2], l$y[11]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[10:11]), y = mean(l$y[10:11]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[10:11]), y = mean(l$y[10:11]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[10], l$x[11], l$y[10], l$y[11], 
                                      tlocs_x, tlocs_y);
@@ -502,14 +512,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:12], y = l$y[1:12], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[12]), y = c(v$vals[2], l$y[12]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[11:12]), y = mean(l$y[11:12]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[11:12]), y = mean(l$y[11:12]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[11], l$x[12], l$y[11], l$y[12], 
                                      tlocs_x, tlocs_y);
@@ -540,14 +550,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:13], y = l$y[1:13], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[13]), y = c(v$vals[2], l$y[13]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[12:13]), y = mean(l$y[12:13]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[12:13]), y = mean(l$y[12:13]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[12], l$x[13], l$y[12], l$y[13], 
                                      tlocs_x, tlocs_y);
@@ -578,14 +588,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:14], y = l$y[1:14], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[14]), y = c(v$vals[2], l$y[14]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[13:14]), y = mean(l$y[13:14]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[13:14]), y = mean(l$y[13:14]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[13], l$x[14], l$y[13], l$y[14], 
                                      tlocs_x, tlocs_y);
@@ -616,14 +626,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:15], y = l$y[1:15], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[15]), y = c(v$vals[2], l$y[15]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[14:15]), y = mean(l$y[14:15]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[14:15]), y = mean(l$y[14:15]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[14], l$x[15], l$y[14], l$y[15], 
                                      tlocs_x, tlocs_y);
@@ -654,14 +664,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:16], y = l$y[1:16], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[16]), y = c(v$vals[2], l$y[16]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[15:16]), y = mean(l$y[15:16]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[15:16]), y = mean(l$y[15:16]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[15], l$x[16], l$y[15], l$y[16], 
                                      tlocs_x, tlocs_y);
@@ -692,14 +702,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:17], y = l$y[1:17], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[17]), y = c(v$vals[2], l$y[17]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[16:17]), y = mean(l$y[16:17]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[16:17]), y = mean(l$y[16:17]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[16], l$x[17], l$y[16], l$y[17], 
                                      tlocs_x, tlocs_y);
@@ -730,14 +740,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:18], y = l$y[1:18], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[18]), y = c(v$vals[2], l$y[18]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[17:18]), y = mean(l$y[17:18]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[17:18]), y = mean(l$y[17:18]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[17], l$x[18], l$y[17], l$y[18], 
                                      tlocs_x, tlocs_y);
@@ -768,14 +778,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:19], y = l$y[1:19], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[19]), y = c(v$vals[2], l$y[19]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[18:19]), y = mean(l$y[18:19]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[18:19]), y = mean(l$y[18:19]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[18], l$x[19], l$y[18], l$y[19], 
                                      tlocs_x, tlocs_y);
@@ -806,14 +816,14 @@ server <- function(input, output, session) {
                     lty = "dotted");
             xvals <- c(v$vals[1], v$vals[3]);
             yvals <- c(v$vals[2], v$vals[4]);
-            points(x = xvals, y = yvals, pch = 20, col = "#D55E00", cex = 3);
+            points(x = xvals, y = yvals, pch = 18, col = "#D55E00", cex = 3);
             points(x = xvals, y = yvals, type = "l", col = "#D55E00", lwd = 3);
             l$x <- seq(from = xvals[1], to = xvals[2], length = 20);
             l$y <- seq(from = yvals[1], to = yvals[2], length = 20);
-            points(x = l$x[1:20], y = l$y[1:20], pch = 20, col = "#0072B2", 
-                   type = "b", cex = 4);
-            points(x = c(v$vals[1], l$x[20]), y = c(v$vals[2], l$y[20]), 
-                   col = "#0072B2", type = "l", lwd = 5);
+            points(x = mean(l$x[19:20]), y = mean(l$y[19:20]), pch = 20, 
+                   col = "#0072B2", type = "p", cex = 3);
+            points(x = mean(l$x[19:20]), y = mean(l$y[19:20]), pch = 1, 
+                   col = "black", type = "p", cex = 2, lwd = 2);
             if(!is.null(tlocs_x)){
                 found <- search_tsct(l$x[19], l$x[20], l$y[19], l$y[20], 
                                      tlocs_x, tlocs_y);
@@ -833,7 +843,7 @@ server <- function(input, output, session) {
                 }
             }
         }
-        if(s$go == 20 & !is.null(v$vals[1])){
+        if(s$go >= 20 & !is.null(v$vals[1])){
             par(mar = c(0, 0, 0, 0), bg = "#CCCC99");
             plot(x = 0, y = 0, type = "n", xlim = c(0, 100), ylim = c(-10, 100),
                  xaxt = "n", yaxt = "n", asp = 1);
@@ -849,12 +859,14 @@ server <- function(input, output, session) {
             m4 <- "Record these numbers for later use.";
             m5 <- "Repeat this exercise until you have completed 3 transects,";
             m6 <- "then continue to the data analysis portion of the project.";
+            m7 <- "Click 'Reset' when you are ready to sample again";
             text(x = 50, y = 75, labels = m1, cex = 2);
             text(x = 50, y = 60, labels = m2, cex = 2);
             text(x = 50, y = 50, labels = m3, cex = 2);
-            text(x = 50, y = 30, labels = m4, cex = 2);
-            text(x = 50, y = 20, labels = m5, cex = 2);
-            text(x = 50, y = 10, labels = m6, cex = 2);
+            text(x = 50, y = 40, labels = m4, cex = 2);
+            text(x = 50, y = 30, labels = m5, cex = 2);
+            text(x = 50, y = 20, labels = m6, cex = 2);
+            text(x = 50, y = 10, labels = m7, cex = 2);
         }
     })
     
