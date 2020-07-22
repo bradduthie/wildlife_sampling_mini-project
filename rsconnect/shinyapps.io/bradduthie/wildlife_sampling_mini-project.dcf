@@ -5,9 +5,9 @@ account: bradduthie
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2578483
-bundleId: 3401019
+bundleId: 3422226
 url: https://bradduthie.shinyapps.io/wildlife_sampling_mini-project/
-when: 1594925317.51165
+when: 1595437493.88045
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: index.docx|index.html|index.pdf|index.Rmd|MyTransect.csv|scratch.R
+ignoredFiles: analysis.docx|analysis.html|analysis.pdf|analysis.Rmd|CSV_screenshot.png|docx_template.docx|improvement_notes.md|index.docx|index.html|index.Rmd|miniproject.bib|MyTransect.csv|pythagorous.png|sampling.docx|sampling.pdf|SCIU3FB_wildlife_sampling_miniproject.R|scratch.R|setwd.png|upload_CSV.png

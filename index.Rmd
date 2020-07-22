@@ -2,10 +2,10 @@
 title: "SCIU3FB Wildlife sampling mini-project"
 author: "Brad Duthie"
 output:
+  html_document: default
   word_document:
     reference_docx: docx_template.docx
   pdf_document: default
-  html_document: default
 linkcolor: blue
 ---
 
@@ -66,18 +66,23 @@ Continue on if you are doing your sampling [online](#online), or skip ahead if y
 Protocol for sampling along a virtual transect (online) {#online}
 ================================================================================
 
-If you are unable to sample along a physical transect on campus, you can simulate the process of data collection in [an online application](https://bradduthie.shinyapps.io/wildlife_sampling_mini-project/). When click the link to this application, you will see a brown box representing a virtual field, and some instructions:
+If you are unable to sample along a physical transect on campus, you can simulate the process of data collection in [an online application](https://bradduthie.shinyapps.io/wildlife_sampling_mini-project/) (**please read these instructions before you start using it.**). When click the link to this application, you will see a brown box representing a virtual field, and some instructions:
 
-> You are in field location number: [YOUR FIELD NUMBER]. Write this number down, then click anywhere in the field to set where your transect starts. Click again to set where your transect ends, and start sampling by clicking 'Sample' once. **Keep your transect inside the dotted box!** Click to start.
+> You are in field location number: [YOUR FIELD NUMBER]. Write this number down, then click anywhere in the field to set where your transect starts. Click again to set where your transect ends, and start sampling by clicking 'Sample' once. **Keep your transect inside the dotted box! (you can always click 'Reset' to start over') Click to start.**
 
-After you have written down your field number, you can begin placing your transects. Make sure that your first click is inside the dotted box (if you click somewhere else by accident, just click 'Reset' to go to a new field). After you click, you should see the text dissappear, and an orange dot in the location where you clicked; this is the start of your transect. You can select anywhere else inside the dotted box to set the end of your transect. If you do not like the transect you have made, you can click 'Reset' and start over.
+After you have written down your field number, you can begin placing your transects. Make sure that your first click is inside the dotted box (if you click somewhere else by accident, just click 'Reset' to go to a new field). After you click, you should see the text dissappear, and an orange diamond in the location where you clicked; this is the start of your transect. You can select anywhere else inside the dotted box to set the end of your transect. **Make sure that the transect you make is not too small;** it should take up at least half the length of the box. If you do not like the transect you have made, you can click 'Reset' and start over.
 
-Once you have the start and end points of your transect, click 'Sample' to start looking for *B. bbqstick* individuals. These are represented as small green dots that you observe perpendicular to the transect. If you observe one or more *B. bbqstick* individuals, then you also see numbers beneath the box indicating how far away these individuals are from the transect. **Write these distances down, or record them in a spreadsheet or text file**. Once you have recorded the distances in one step along the transect, take another step by again clicking 'Sample'. You should see some more *B. bbqstick* individuals and distances to write down (note sometimes you will not see any). Continue to move along the transect from the start to the end by clicking 'Sample', and writing down *B. bbqstick* distances each time. Once you have come to the end of your transect, you should see some more instructions.
+Once you have the start and end points of your transect, click 'Sample' to start looking for *B. bbqstick* individuals. These are represented as small green dots that you observe perpendicular to the transect (your position is represented by the blue dot on the transect). If you observe one or more *B. bbqstick* individuals, then you also see numbers beneath the box indicating how far away these individuals are from the transect. **Write these distances down, or record them in a spreadsheet or text file**. Once you have recorded the distances in one step along the transect, take another step by again clicking 'Sample'. You should see some more *B. bbqstick* individuals and distances to write down (note sometimes you will not see any). Continue to move along the transect from the start to the end by clicking 'Sample', and writing down *B. bbqstick* distances each time. 
+
+> Note that the reason you are being asked to write these distances down manually (rather than having the program simply give you the data at the end) is that one of the learning objectives of this mini-project is recording field data observations. Since this might not be possible campus, this online simulation attempts to replicate the process of real data collection in the field as much as possible with the technology available.
+
+Once you have come to the end of your transect, you should see some more instructions.
 
 > You have now finished sampling distances. The start of your transect was: X = [LOCATION], Y = [LOCATION]. The end of your transect was: X = [LOCATION], Y = [LOCATION]. Record these numbers for later use. Repeat this exercise until you have completed 3 transects, then continue to the data analysis portion of the project.
 
 After recording your X and Y starting and ending locations, click 'Reset' to repeat the exercise. Do this until you have three transects of data, which you can label 'A', 'B', and 'C'. You will use these in you data analysis.
 
+> You are now ready to move on to the [data analysis instructions](https://bradduthie.github.io/wildlife_sampling_mini-project/analysis.html).
 
 Protocol for sampling along a physical transect (on campus) {#campus}
 ================================================================================
